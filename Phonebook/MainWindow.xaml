@@ -1,0 +1,63 @@
+﻿<Window x:Class="Phonebook.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Phonebook"
+        xmlns:vm="clr-namespace:Phonebook.ViewModels"
+        xmlns:vw="clr-namespace:Phonebook.Views"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <!-- A/ ici se situe les ressources de ma fenêtre-->
+    <!--les ressources de mes ecrans que la fenêtre pourra utiliser -->
+    <!-- les recuperer dans Views et enumerer les ViewsModels que nous allons utiliser-->
+    <!-- 1/declarer les namespaces dont lesquelles ils sont :xmlns:vm="clr-namespace:Phonebook.ViewModels" ligne7-->
+    <!-- 2/declarer les namespaces dont lesquelles ils sont :xmlns:vw="clr-namespace:Phonebook.Views" ligne8-->
+
+    <!-- B/ declarer mes differents ecrans : via Window.Ressources-->
+    <Window.Resources>
+        <!-- C/ afficher/representer des données //=> depend du type de donnée du ViewModels :vm-->
+        <DataTemplate DataType="{x:Type vm:AboutViewModel}">
+            <!-- D/ selectionner l'ecran/la page à afficher dns Views :vw -->
+            <!-- E/ permet de binder le DataContext au DataContext actuel-->
+            <!-- {Binding} = DataContext-->
+            <vw:About DataContext="{Binding}"/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:ContactsViewModel}">
+            <!--DataContext="{Binding} permet d'acceder au DataContext actuel-->
+            <vw:Contacts DataContext="{Binding}"/>
+        </DataTemplate>
+    </Window.Resources>
+    <!-- si erreur -> aller dans generer et regenerer la solution -->
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <StackPanel Background="#EEE" Grid.RowSpan="5">
+            <TextBlock Padding="10 " TextAlignment="Center" FontSize="20">Phonebook</TextBlock>
+            <!--Je bind mes boutons:Click aux differentes fonctions c#-->
+            <Button Margin="5" Padding="5" Content="About" Click="About_Click"/>
+            <Button Margin="5" Padding="5" Content="Contacts" Click="Contacts_Click"/>
+        </StackPanel>
+
+        <!--contient une vue: contentControl / une porte vers une autre vue , est propre au C#-->
+        <!--Content="{Binding} , le contenu à afficher sera determiné par mon DataContext sur C#-->
+        <!--Content="{Binding} , permettra à C# de savoir quoi/quel objet envoyer via le DataType-->
+        <!--car ne sait pas afficher une classe mais via WindowRessources qui englobent :DataTemplate, DataType et DataContext il peut-->
+        <ContentControl Content="{Binding}" Grid.Column="1" Grid.ColumnSpan="5" Grid.RowSpan="5"/>
+        
+    </Grid>
+</Window>
