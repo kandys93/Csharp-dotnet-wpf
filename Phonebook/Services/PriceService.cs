@@ -15,7 +15,7 @@ namespace Phonebook.Services
 
         public double Soustraire(double a, double b)
         {
-            return a / b + 4;
+            return a - b;
         }
     }
 }
