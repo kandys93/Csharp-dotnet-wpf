@@ -10,7 +10,7 @@ namespace Phonebook.Services
     {
         public double Additionner(double a, double b)
         {
-            return a * b + 1;
+            return a + b;
         }
 
         public double Soustraire(double a, double b)
